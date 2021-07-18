@@ -5,13 +5,13 @@ int length(ListNode* head)
   while(head)
   {
     count++;
-    curr=curr->next;
+    head=head->next;
   }
   return count;
 }
 ListNode * ReverseKGroups(ListNode * head,int k)
 {
-    if(!head)retutn NULL;
+    if(!head)return NULL;
   if(length(head)<k or k==1)return head;
   ListNode * curr=head;
   ListNode * prev=NULL,*next=NULL;
@@ -24,6 +24,6 @@ ListNode * ReverseKGroups(ListNode * head,int k)
     curr=next;
     count++;
   }
-  head->next= ReverseKGroups(ListNode * curr);
+  head->next= ReverseKGroups(curr);
   return prev;
 }
