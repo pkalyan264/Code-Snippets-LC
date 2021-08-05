@@ -1,91 +1,35 @@
-struct Queue
+int cnt=0;
+int n=5;
+int front=rear=0;
+int arr[n]={0};
+int qpush(int a)
 {
-  int rear,front;
-  int size;
-  int *arr;
-  Queue(int s)
-  {
-    front = rear = -1;
-    size = s;
-    arr = new int[s];
-  }
-  void enQueue(int value);
-    int deQueue();
-    void displayQueue();
+	if(cnt==n)
+	{
+		cout<<"Queue is Full"<<endl;
+		return -1;
+	}
+	else
+	{
+		arr[rear%n]=a;
+		rear++;
+		cnt++;
+		return a;
+	}
 }
-void Queue::enQueue(int value)
+
+void pop()
 {
-    if ((front == 0 && rear == size-1) ||
-            (rear == (front-1)%(size-1)))
-    {
-        printf("\nQueue is Full");
-        return;
-    }
- 
-    else if (front == -1) /* Insert First Element */
-    {
-        front = rear = 0;
-        arr[rear] = value;
-    }
- 
-    else if (rear == size-1 && front != 0)
-    {
-        rear = 0;
-        arr[rear] = value;
-    }
- 
-    else
-    {
-        rear++;
-        arr[rear] = value;
-    }
+	if(cnt==0)
+	{
+		arr[front%n]=-1;
+
+	}
+	front++;
+	cnt--;
 }
- 
-// Function to delete element from Circular Queue
-int Queue::deQueue()
+int top()
 {
-    if (front == -1)
-    {
-        printf("\nQueue is Empty");
-        return INT_MIN;
-    }
- 
-    int data = arr[front];
-    arr[front] = -1;
-    if (front == rear)
-    {
-        front = -1;
-        rear = -1;
-    }
-    else if (front == size-1)
-        front = 0;
-    else
-        front++;
- 
-    return data;
-}
- 
-// Function displaying the elements
-// of Circular Queue
-void Queue::displayQueue()
-{
-    if (front == -1)
-    {
-        printf("\nQueue is Empty");
-        return;
-    }
-    printf("\nElements in Circular Queue are: ");
-    if (rear >= front)
-    {
-        for (int i = front; i <= rear; i++)
-            printf("%d ",arr[i]);
-    }
-    else
-    {
-        for (int i = front; i < size; i++)
-            printf("%d ", arr[i]);
- 
-        for (int i = 0; i <= rear; i++)
-            printf("%d ", arr[i]);
-    }
+	if(cnt==0)return -1;
+	return arr[front%n];
 }
